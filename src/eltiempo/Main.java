@@ -1,4 +1,4 @@
-package sample;
+package eltiempo;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,8 +1,6 @@
-package sample;
+package eltiempo;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +13,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 
 public class Controller {
@@ -46,28 +43,37 @@ public class Controller {
         parse1.anadirInfoArrays();
 
     }
+
    public void refrescar() throws IOException, SAXException, ParserConfigurationException {
-items.get(1);
-       for(int i = 0;i < parse1.dias.size();i++){
-           items.add(parse1.dias.get(i));
-       }
-       listaTiempo.setItems(items);
-       labelTitulo.setFont(Font.font(20));
+       //Limpiar el ObservableList
+       items.clear();
+
+       // Ponemos el nombre de la ciudad en el label, como titulo
        labelTitulo.setText(parse1.getNombreCiudad());
 
+       //Para cada tem llama a la funcion toString para dar la informacion y la anadimos al ObservableList
+       for(int i = 0;i < parse1.dias.size();i++){
+           //items.add(parse1.dias.get(i));
+           items.add(parse1.toString(i));
+       }
+
+       //Seteamos el ListView con los Items del ObservableList
+       listaTiempo.setItems(items);
+
+       //Cambiamos la fuente de tamaño
+       labelTitulo.setFont(Font.font(20));
    }
 
     public void mostrarInfo(Event event) throws IOException, SAXException, ParserConfigurationException {
-
         for(int i = 0;i < items.size();i++){
-            textInfo.setText(parse1.temperatura.get(i));
+            textInfo.setText(parse1.toString(i));
         }
-
     }
 
     public void salirAplicacion(ActionEvent actionEvent) {
         Platform.exit();
     }
+
 
 
 }

@@ -1,4 +1,4 @@
-package sample;
+package eltiempo;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,6 +21,13 @@ public class Parser {
     public  ArrayList<String> nubes = new ArrayList();
     public static final File XML = new File("forecast.xml");
 
+    /**
+     *
+     * @return
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public String getNombreCiudad() throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -31,6 +38,12 @@ public class Parser {
         return nombreCiudad;
     }
 
+    /**
+     *
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public void anadirInfoArrays() throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -48,4 +61,16 @@ public class Parser {
         }
     }
 
-  }
+    /**
+     *
+     * @param pos
+     * @return
+     */
+    public String toString(int pos) {
+        return  "Dia = " + dias.get(pos) + "\n" +
+                "Temperatura = " + temperatura.get(pos) + "\n" +
+                "TemperaturaMax = " + temperaturaMax.get(pos) +"\n" +
+                "TemperaturaMin = " + temperaturaMin.get(pos) +"\n" +
+                "Nubes = " + nubes.get(pos);
+    }
+}
