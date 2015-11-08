@@ -66,6 +66,15 @@ public class Parser {
      * @param pos
      * @return
      */
+    public String toPrevision(int pos){
+        return nubes.get(pos);
+    }
+
+    /**
+     *
+     * @param pos
+     * @return
+     */
     public String toString(int pos) {
         return  "Dia = " + dias.get(pos) + "\n" +
                 "Temperatura = " + temperatura.get(pos) + "\n" +

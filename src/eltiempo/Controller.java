@@ -10,13 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-
-
 
 public class Controller {
     @FXML
@@ -30,6 +29,10 @@ public class Controller {
     Button btnRefrescar;
     @FXML
     TextArea textInfo;
+    @FXML
+    ImageView iconoImagen;
+
+    public int itemSeleccionado;
 
     public Parser parse1 = new Parser();
 
@@ -37,24 +40,28 @@ public class Controller {
     public void initialize() throws IOException, SAXException, ParserConfigurationException {
         //Muestra icono boton
         btnRefrescar.setGraphic(new ImageView("refresh1.png"));
+
         //Desactiva el textArea
-        textInfo.setDisable(true);
+        //textInfo.setDisable(true);
+
         //Llama a funcion que rellena los arrays de informacion
         parse1.anadirInfoArrays();
 
+
     }
 
-   public void refrescar() throws IOException, SAXException, ParserConfigurationException {
+   public void refrescar()  throws IOException, SAXException, ParserConfigurationException {
+
        //Limpiar el ObservableList
        items.clear();
 
        // Ponemos el nombre de la ciudad en el label, como titulo
        labelTitulo.setText(parse1.getNombreCiudad());
 
-       //Para cada tem llama a la funcion toString para dar la informacion y la anadimos al ObservableList
+       //Para cada item llama a la funcion toString para dar la informacion y la anadimos al ObservableList
        for(int i = 0;i < parse1.dias.size();i++){
-           //items.add(parse1.dias.get(i));
-           items.add(parse1.toString(i));
+           items.add(parse1.dias.get(i));
+           //items.add(parse1.toString(i));
        }
 
        //Seteamos el ListView con los Items del ObservableList
@@ -62,18 +69,32 @@ public class Controller {
 
        //Cambiamos la fuente de tamaño
        labelTitulo.setFont(Font.font(20));
+
    }
 
-    public void mostrarInfo(Event event) throws IOException, SAXException, ParserConfigurationException {
-        for(int i = 0;i < items.size();i++){
-            textInfo.setText(parse1.toString(i));
-        }
+    public void mostrarInfo(){
+
+        //Listener para que en funcion de la fila seleccionada del ListView haga una cosa u otra.
+        listaTiempo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            //Sacamos el numero del índice que tenemos seleccionado
+            itemSeleccionado = listaTiempo.getSelectionModel().getSelectedIndex();
+
+            //Muestra la infomacion de la fila seleccionada
+            textInfo.setText(parse1.toString(itemSeleccionado));
+
+            Image icon = new Image(parse1.toPrevision(itemSeleccionado) + ".png"); // ruta de la imagen de la previsión
+            iconoImagen.setImage(icon); // la asigna al ImageView.
+
+
+
+        });
+
     }
 
     public void salirAplicacion(ActionEvent actionEvent) {
         Platform.exit();
     }
-
 
 
 }

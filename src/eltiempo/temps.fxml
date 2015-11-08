@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -27,7 +28,12 @@
         </menus>
       </MenuBar>
       <Button fx:id="btnRefrescar" layoutX="427.0" layoutY="347.0" mnemonicParsing="false" onAction="#refrescar" text="Refrescar" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" />
-      <TextArea fx:id="textInfo" layoutX="362.0" layoutY="57.0" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0" />
-      <Label fx:id="labelTitulo" layoutY="39.0" prefHeight="60.0" prefWidth="280.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0" />
+      <TextArea fx:id="textInfo" layoutX="362.0" layoutY="57.0" prefHeight="157.0" prefWidth="220.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0" />
+      <HBox layoutX="10.0" layoutY="30.0">
+         <children>
+            <Label fx:id="labelTitulo" prefHeight="60.0" prefWidth="230.0" />
+            <ImageView fx:id="iconoTiempo" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
