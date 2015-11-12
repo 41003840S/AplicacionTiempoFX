@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
@@ -25,29 +22,31 @@ public class Controller {
     ObservableList items =
             FXCollections.observableArrayList();
     @FXML
-    Button btnRefrescar;
+    Button btnRefrescar, atras;
     @FXML
     TextArea textInfo;
     @FXML
     ImageView iconoImagen;
 
-
     public int itemSeleccionado;
-
     public Parser parse1 = new Parser();
+
 
     //Initialize
     public void initialize() throws IOException, SAXException, ParserConfigurationException {
         //Muestra icono boton
         btnRefrescar.setGraphic(new ImageView("icons/refresh1.png"));
-
-        //Desactiva el textArea
-        //textInfo.setDisable(true);
+        //Muestra icono boton
+        atras.setGraphic(new ImageView("icons/arrow.png"));
 
         //Llama a funcion que rellena los arrays de informacion
         parse1.anadirInfoArrays();
 
+        listaTiempo.setVisible(true);
+        textInfo.setVisible(false);
 
+        //Desactiva el textArea
+        //textInfo.setDisable(true);
     }
 
    public void refrescar()  throws IOException, SAXException, ParserConfigurationException {
@@ -82,8 +81,14 @@ public class Controller {
 
             //Muestra la infomacion de la fila seleccionada
             textInfo.setText(parse1.toString(itemSeleccionado));
+
+            //Muestra el icono de ese dia
             Image icono = new Image("/icons/" + parse1.nubes.get(itemSeleccionado).toString() + ".png"); // ruta de la imagen de la previsió
             iconoImagen.setImage(icono); // la asigna al ImageView.
+
+            listaTiempo.setVisible(false);
+            textInfo.setVisible(true);
+
 
         });
 
@@ -93,5 +98,16 @@ public class Controller {
         Platform.exit();
     }
 
+    public void about(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Aplicacion del tiempo");
+        alert.setHeaderText("Aplicacion del tiempo");
+        alert.setContentText("Descubre el pronostico del tiempo");
+        alert.showAndWait();
+    }
 
+    public void retroceder(ActionEvent actionEvent) {
+        listaTiempo.setVisible(true);
+        textInfo.setVisible(false);
+    }
 }
