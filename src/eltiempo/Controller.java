@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,6 +31,7 @@ public class Controller {
     @FXML
     ImageView iconoImagen;
 
+
     public int itemSeleccionado;
 
     public Parser parse1 = new Parser();
@@ -39,7 +39,7 @@ public class Controller {
     //Initialize
     public void initialize() throws IOException, SAXException, ParserConfigurationException {
         //Muestra icono boton
-        btnRefrescar.setGraphic(new ImageView("refresh1.png"));
+        btnRefrescar.setGraphic(new ImageView("icons/refresh1.png"));
 
         //Desactiva el textArea
         //textInfo.setDisable(true);
@@ -72,7 +72,7 @@ public class Controller {
 
    }
 
-    public void mostrarInfo(){
+    public void mostrarInfo()throws IOException, SAXException, ParserConfigurationException{
 
         //Listener para que en funcion de la fila seleccionada del ListView haga una cosa u otra.
         listaTiempo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -82,11 +82,8 @@ public class Controller {
 
             //Muestra la infomacion de la fila seleccionada
             textInfo.setText(parse1.toString(itemSeleccionado));
-
-            Image icon = new Image(parse1.toPrevision(itemSeleccionado) + ".png"); // ruta de la imagen de la previsión
-            iconoImagen.setImage(icon); // la asigna al ImageView.
-
-
+            Image icono = new Image("/icons/" + parse1.nubes.get(itemSeleccionado).toString() + ".png"); // ruta de la imagen de la previsió
+            iconoImagen.setImage(icono); // la asigna al ImageView.
 
         });
 
