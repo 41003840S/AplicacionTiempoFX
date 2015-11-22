@@ -5,10 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -22,7 +28,7 @@ public class Controller {
     ObservableList items =
             FXCollections.observableArrayList();
     @FXML
-    Button btnRefrescar, atras;
+    Button btnRefrescar, atras, estadisticas;
     @FXML
     TextArea textInfo;
     @FXML
@@ -30,14 +36,14 @@ public class Controller {
 
     public int itemSeleccionado;
     public Parser parse1 = new Parser();
-
+    private EstadisticasController dlgController;
 
     //Initialize
     public void initialize() throws IOException, SAXException, ParserConfigurationException {
-        //Muestra icono boton
-        btnRefrescar.setGraphic(new ImageView("icons/refresh1.png"));
-        //Muestra icono boton
+        //Mostrar iconos en los botones
+        btnRefrescar.setGraphic(new ImageView("icons/refresh.png"));
         atras.setGraphic(new ImageView("icons/arrow.png"));
+        estadisticas.setGraphic(new ImageView("icons/estadisticas.png"));
 
         //Llama a funcion que rellena los arrays de informacion
         parse1.anadirInfoArrays();
@@ -83,7 +89,7 @@ public class Controller {
             textInfo.setText(parse1.toString(itemSeleccionado));
 
             //Muestra el icono de ese dia
-            Image icono = new Image("/icons/" + parse1.nubes.get(itemSeleccionado).toString() + ".png"); // ruta de la imagen de la previsió
+            Image icono = new Image("/icons/" + parse1.nubes.get(itemSeleccionado)+ ".png"); // ruta de la imagen de la previsió
             iconoImagen.setImage(icono); // la asigna al ImageView.
 
             listaTiempo.setVisible(false);
@@ -109,5 +115,16 @@ public class Controller {
     public void retroceder(ActionEvent actionEvent) {
         listaTiempo.setVisible(true);
         textInfo.setVisible(false);
+    }
+
+    public void muestraEstadisticas(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent parent = FXMLLoader.load(
+                EstadisticasController.class.getResource("estadisticas.fxml"));
+        stage.setScene(new Scene(parent));
+        stage.setTitle("Estadisticas");
+        stage.initModality(Modality.WINDOW_MODAL);
+
+        stage.show();
     }
 }

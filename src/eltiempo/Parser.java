@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class Parser {
 
     public  String nombreCiudad;
-    public  ArrayList<String> dias = new ArrayList<>();
-    public  ArrayList<String> temperatura = new ArrayList();
-    public  ArrayList<String> temperaturaMax = new ArrayList();
-    public  ArrayList<String> temperaturaMin = new ArrayList();
-    public  ArrayList<String> nubes = new ArrayList();
+    public  ArrayList<String> dias = new <String>ArrayList();
+    public  ArrayList<String> temperatura = new <String> ArrayList();
+    public  ArrayList<String> temperaturaMax = new <String>ArrayList();
+    public  ArrayList<String> temperaturaMin = new <String>ArrayList();
+    public  ArrayList<String> nubes = new <String>ArrayList();
     public static final File XML = new File("forecast.xml");
 
     /**
