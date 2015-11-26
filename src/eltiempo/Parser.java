@@ -23,7 +23,7 @@ public class Parser {
 
     /**
      *
-     * @return
+     * @return nombreCiudad
      * @throws ParserConfigurationException
      * @throws IOException
      * @throws SAXException
@@ -73,7 +73,7 @@ public class Parser {
     /**
      *
      * @param pos
-     * @return
+     * @return descrpicion
      */
     public String toString(int pos) {
         return  "Dia = " + dias.get(pos) + "\n" +

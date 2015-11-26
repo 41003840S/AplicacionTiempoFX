@@ -3,10 +3,8 @@ package eltiempo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -36,7 +34,6 @@ public class Controller {
 
     public int itemSeleccionado;
     public Parser parse1 = new Parser();
-    private EstadisticasController dlgController;
 
     //Initialize
     public void initialize() throws IOException, SAXException, ParserConfigurationException {
@@ -100,11 +97,11 @@ public class Controller {
 
     }
 
-    public void salirAplicacion(ActionEvent actionEvent) {
+    public void salirAplicacion() {
         Platform.exit();
     }
 
-    public void about(ActionEvent actionEvent) {
+    public void about() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Aplicacion del tiempo");
         alert.setHeaderText("Aplicacion del tiempo");
@@ -112,12 +109,12 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void retroceder(ActionEvent actionEvent) {
+    public void retroceder() {
         listaTiempo.setVisible(true);
         textInfo.setVisible(false);
     }
 
-    public void muestraEstadisticas(ActionEvent actionEvent) throws IOException {
+    public void muestraEstadisticas() throws IOException {
         Stage stage = new Stage();
         Parent parent = FXMLLoader.load(
                 EstadisticasController.class.getResource("estadisticas.fxml"));
